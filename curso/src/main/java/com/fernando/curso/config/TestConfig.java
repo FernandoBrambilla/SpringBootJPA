@@ -12,6 +12,7 @@ import org.springframework.context.annotation.Profile;
 
 import com.fernando.curso.entities.Order;
 import com.fernando.curso.entities.User;
+import com.fernando.curso.entities.enums.OrderStatus;
 import com.fernando.curso.repositories.OrderRepository;
 import com.fernando.curso.repositories.UserRepository;
 
@@ -31,8 +32,8 @@ public class TestConfig implements CommandLineRunner{
 		User u2 = new User(null, "Alex Green", "alex@gmail.com", "977777777", "123456"); 
 		
 	
-		Order o2 = new Order(null, Instant.now(), u2);
-		Order o3 = new Order(null, Instant.now(), u1);
+		Order o2 = new Order(null, Instant.now(),OrderStatus.PAID, u2);
+		Order o3 = new Order(null, Instant.now(),OrderStatus.DELIVERED, u1);
 		
 		userRepository.saveAll(Arrays.asList(u1,u2));
 		orderRepository.saveAll(Arrays.asList(o2,o3));
