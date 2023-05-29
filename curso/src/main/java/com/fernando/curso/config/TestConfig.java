@@ -13,6 +13,7 @@ import org.springframework.context.annotation.Profile;
 import com.fernando.curso.entities.Category;
 import com.fernando.curso.entities.Order;
 import com.fernando.curso.entities.OrderItem;
+import com.fernando.curso.entities.Payment;
 import com.fernando.curso.entities.Product;
 import com.fernando.curso.entities.User;
 import com.fernando.curso.entities.enums.OrderStatus;
@@ -73,6 +74,11 @@ public class TestConfig implements CommandLineRunner{
 		OrderItem oi3 = new OrderItem(o2,p2,4,p2.getPrice());
 		OrderItem oi4 = new OrderItem(o2,p3,2,p3.getPrice());
 		orderItemRepository.saveAll(Arrays.asList(oi1,oi2,oi3,oi4));
+		
+		Payment pay1 = new Payment(null, Instant.now(), o1);
+		o1.setPayment(pay1);
+		orderRepository.saveAll(Arrays.asList(o1));
+		
 		
 		
 		
