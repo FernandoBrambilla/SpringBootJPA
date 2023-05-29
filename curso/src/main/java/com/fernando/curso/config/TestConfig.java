@@ -12,10 +12,12 @@ import org.springframework.context.annotation.Profile;
 
 import com.fernando.curso.entities.Category;
 import com.fernando.curso.entities.Order;
+import com.fernando.curso.entities.OrderItem;
 import com.fernando.curso.entities.Product;
 import com.fernando.curso.entities.User;
 import com.fernando.curso.entities.enums.OrderStatus;
 import com.fernando.curso.repositories.CategoryRepository;
+import com.fernando.curso.repositories.OrderItemRepository;
 import com.fernando.curso.repositories.OrderRepository;
 import com.fernando.curso.repositories.ProductRepository;
 import com.fernando.curso.repositories.UserRepository;
@@ -36,7 +38,8 @@ public class TestConfig implements CommandLineRunner{
 	@Autowired
 	private ProductRepository productRepository;
 	
-	
+	@Autowired
+	private OrderItemRepository orderItemRepository;
 	
 
 	@Override
@@ -61,9 +64,15 @@ public class TestConfig implements CommandLineRunner{
 		User u2 = new User(null, "Alex Green", "alex@gmail.com", "977777777", "123456"); 
 		userRepository.saveAll(Arrays.asList(u1,u2));
 	
-		Order o2 = new Order(null, Instant.now(),OrderStatus.PAID, u2);
-		Order o3 = new Order(null, Instant.now(),OrderStatus.DELIVERED, u1);
-		orderRepository.saveAll(Arrays.asList(o2,o3));
+		Order o1 = new Order(null, Instant.now(),OrderStatus.PAID, u2);
+		Order o2 = new Order(null, Instant.now(),OrderStatus.DELIVERED, u1);
+		orderRepository.saveAll(Arrays.asList(o1,o2));
+		
+		OrderItem oi1 = new OrderItem(o1,p1,2,p1.getPrice());
+		OrderItem oi2 = new OrderItem(o1,p3,1,p3.getPrice());
+		OrderItem oi3 = new OrderItem(o2,p2,4,p2.getPrice());
+		OrderItem oi4 = new OrderItem(o2,p3,2,p3.getPrice());
+		orderItemRepository.saveAll(Arrays.asList(oi1,oi2,oi3,oi4));
 		
 		
 		
